@@ -2,8 +2,11 @@ package entity;
 
 import entity.interfaces.IMyBST;
 
+import java.util.Iterator;
+
 public class MyBST<K extends Comparable<K>, V> implements IMyBST<K, V> {
     private MyNode<K, V> root;
+    private int size;
 
     private class MyNode<K, V> {
         private K key;
@@ -21,11 +24,17 @@ public class MyBST<K extends Comparable<K>, V> implements IMyBST<K, V> {
 
     public MyBST() {
         root = null;
+        size = 0;
     }
 
 
     @Override
     public void put(K key, V value) {
+//        if(root == null) {
+//            root = new MyNode(key, value);
+//        }
+//
+//        size++;
 
     }
 
@@ -42,5 +51,9 @@ public class MyBST<K extends Comparable<K>, V> implements IMyBST<K, V> {
     public Iterable<K> iterator() {
         return null;
     }
+
+    //private class MyBSTIterator implements Iterator<K> {}
+
+
 
 }

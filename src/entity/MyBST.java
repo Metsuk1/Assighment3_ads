@@ -2,6 +2,8 @@ package entity;
 
 import entity.interfaces.IMyBST;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.Stack;
 
 /**
  * Binary Search Tree
@@ -65,22 +67,61 @@ public class MyBST<K extends Comparable<K>, V> implements IMyBST<K, V> {
         deleting(key);//call supporting delete method
     }
 
-//    public Iterator<K> iterator() {
-//        return new MyBSTIterator();
-//    }
 
-//      private class MyBSTIterator implements Iterator<K> {
-//
-//        @Override
-//        public boolean hasNext() {
-//            return false;
-//        }
-//
-//        @Override
-//        public K next() {
-//            return null;
-//        }
-//    }
+    /**
+     * Return iterator
+     * @return the in order iterator
+     */
+    public Iterator<MyNode<K, V>> iterator() {
+        return new MyBSTIterator();
+    }
+
+    /**
+     * implementation of in order iterator by use stack
+     */
+    private class MyBSTIterator implements Iterator<MyNode<K, V>> {
+        private Stack<MyNode<K, V>> stack;
+
+        public MyBSTIterator() {
+            stack = new Stack<>();
+            moveLeft(root);
+        }
+
+        private void moveLeft(MyNode<K, V> current) {
+            while (current != null) {
+                stack.push(current);
+                current = current.left;
+            }
+        }
+
+        @Override
+        public boolean hasNext() {
+            return !stack.isEmpty();
+        }
+
+        @Override
+        public MyNode<K, V> next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException("Stack is empty");
+            }
+
+            MyNode<K, V> current = stack.pop();
+            if (current.right != null) {
+                moveLeft(current.right);
+            }
+
+            return current;
+        }
+    }
+
+    /**
+     * Returns size of the BST.
+     * @return the size
+     */
+    public int getSize() {
+        return size;
+    }
+
     /**
      * Helper method that handles inserting a node into the tree.
      * O(log n) time complexity.

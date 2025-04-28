@@ -220,6 +220,23 @@ public class MyHashTable<K,V> implements IMyHashTable<K,V> {
     }
 
     /**
+     * this method aim to get the size of a bucket
+     * O(n) time complexity.
+     * @param index the index of the bucket
+     * @return the size of the bucket
+     */
+    public int getBucketSize(int index){
+        HashNode<K, V> current = chainArr[index];
+        int bucketSize = 0;
+        while(current != null) {
+            bucketSize++;
+            current = current.next;
+        }
+
+        return bucketSize;
+    }
+
+    /**
      * Checks if the key is null.
      * @param key the key to check
      * @throws NullPointerException if key is null
@@ -240,5 +257,7 @@ public class MyHashTable<K,V> implements IMyHashTable<K,V> {
             throw new NullPointerException("value is null");
         }
     }
+
+
 
 }

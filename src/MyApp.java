@@ -16,7 +16,7 @@ public class MyApp {
             System.out.println("1.Test my Binary Search Tree");
             System.out.println("2.Test my HashTable");
             System.out.println("3.Test my Testing class");
-            System.out.println("4. Exit");
+            System.out.println("4.Exit");
 
             System.out.println("Enter your choice: ");
             int choice = sc.nextInt();

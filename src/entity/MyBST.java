@@ -10,11 +10,11 @@ import java.util.Stack;
  * @param <K> it's the key
  * @param <V> it's the value
  */
-public class MyBST<K extends Comparable<K>, V> implements IMyBST<K, V> {
+public class MyBST<K extends Comparable<K>, V> implements IMyBST<K, V>,Iterable<MyBST<K,V>.MyNode<K,V>>{
     private MyNode<K, V> root;
     private int size;
 
-    private class MyNode<K, V> {
+    public class MyNode<K, V> {
         private K key;
         private V value;
         private MyNode<K, V> left;
@@ -25,6 +25,14 @@ public class MyBST<K extends Comparable<K>, V> implements IMyBST<K, V> {
             this.value = value;
             left = null;
             right = null;
+        }
+
+        public K getKey() {
+            return key;
+        }
+
+        public V getValue() {
+            return value;
         }
     }
 
@@ -72,6 +80,7 @@ public class MyBST<K extends Comparable<K>, V> implements IMyBST<K, V> {
      * Return iterator
      * @return the in order iterator
      */
+    @Override
     public Iterator<MyNode<K, V>> iterator() {
         return new MyBSTIterator();
     }
@@ -150,7 +159,7 @@ public class MyBST<K extends Comparable<K>, V> implements IMyBST<K, V> {
 
             if(compare < 0) {
                 if(current.left == null) {
-                    current.left = new MyNode(key, value);
+                    current.left = new MyNode<>(key, value);
                     size++;
 
                     return;
@@ -158,7 +167,7 @@ public class MyBST<K extends Comparable<K>, V> implements IMyBST<K, V> {
                 current = current.left;
             }else{
                 if(current.right == null) {
-                current.right = new MyNode(key, value);
+                current.right = new MyNode<>(key, value);
                 size++;
 
                 return;
